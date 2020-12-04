@@ -7,17 +7,18 @@ module.exports = {
   ],
   // Customize your site metadata:
   siteMetadata: {
-    title: `My Blog Title`,
-    author: `My Name`,
-    description: `My site description...`,
+    title: `Enseñando Aprendes Más`,
+    author: `Billi Ramirez`,
+    description: `En este blog comparto conocimientos y experiencias que he venido aprendiendo a lo largo de mi carrera como desarrollador de software`,
+    siteUrl: `https://billiramirez.dev`,
     social: [
       {
         name: `twitter`,
-        url: `https://twitter.com/gatsbyjs`,
+        url: `https://twitter.com/billiramirezdev`,
       },
       {
         name: `github`,
-        url: `https://github.com/gatsbyjs`,
+        url: `https://github.com/billiramirez`,
       },
     ],
   },
