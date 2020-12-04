@@ -8,11 +8,11 @@ import { Styled } from "theme-ui"
 export default function Bio() {
   return (
     <>
-      Hola, soy <Styled.a href="http://example.com/">Billi Ramirez</Styled.a>
-      {` `} y trabajo como Software Developer.
+      Hi, my name <Styled.a href="http://example.com/">Billi Ramirez</Styled.a>
+      {` `} and I'm a Software Developer
       <br />
-      En este blog comparto conocimientos y experiencias que he venido
-      aprendiendo en esta carrera
+      I'm taking this space to share with you my knowledge and experiences I've
+      learned through this path.
     </>
   )
 }

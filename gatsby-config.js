@@ -7,9 +7,10 @@ module.exports = {
   ],
   // Customize your site metadata:
   siteMetadata: {
-    title: `Enseñando Aprendes Más`,
+    title: `The More You Teach, The More You Learn`,
     author: `Billi Ramirez`,
-    description: `En este blog comparto conocimientos y experiencias que he venido aprendiendo a lo largo de mi carrera como desarrollador de software`,
+    description: `I'm taking this space to share with you my knowledge and experiences I've
+    learned through this path.`,
     siteUrl: `https://billiramirez.dev`,
     social: [
       {
