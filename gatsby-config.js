@@ -1,5 +1,17 @@
+require("dotenv").config()
+
 module.exports = {
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        // The property ID; the tracking code won't be generated without it
+        trackingId: process.env.GOOGLE_TRACKING_ID,
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: true,
+        anonymize: true,
+      },
+    },
     {
       resolve: `gatsby-theme-blog`,
       options: {},
