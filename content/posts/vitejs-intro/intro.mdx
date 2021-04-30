@@ -1,0 +1,97 @@
+---
+title: Vitejs - Intro
+date: 2021-04-30
+image: ./cover.png
+imageAlt: Vite Cover Image
+---
+
+# Introducción
+
+## ¿Qué es Vitejs?
+
+Es una herramienta para Frontend, creada por [Evan You](https://twitter.com/youyuxi), mismo creador de Vuejs, esta herramienta nos permitirá crear aplicaciones de Javascript usando algún framework o libreria como [ReactJs](https://reactjs.org/), [Vuejs](https://vuejs.org/), [Angular](https://angular.io/) ya sea con algún framework especifico o ya sea **Vanillajs**
+
+---
+
+## Algunas Características
+
+### 💡 Inicio Instantanéo del Server (Instant Server Start)
+
+Nos brinda los archivos que necesitamos en el momento qu eo necesitamos, atraves de módulos de javascript nativos ([ESM](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)), con lo cual no tendremos que lidiar con el **building**
+
+---
+
+### ⚡️ Rápido HMR - (Lightning Fast HMR)
+
+Sin importar el tamaño de la aplicación, podremos ver reflejados los cambios en nuestro codebase de manera instantanea.
+
+### 🛠️ Grandiosas Características - (Rich Features)
+
+A esto nos referimos a caracteristicas grandiosas por debajo, tales como son el uso de JSX, CSS, Typescript.
+
+### 📦 Build Optimizado - (Optimized Build)
+
+De manera interna ya trae pre-configurado Rollup con soporte a multiples paginas y soporte para librerias.
+
+### 🔩 Plugins Universales - (Universal Plugins)
+
+Al hacer uso de Rollup de manera interna, este provee una interfaz compartida entre desarrolllo y build
+
+### 🔑 APIs completamenta tipadas - (Fully Typed APIs)
+
+APIs totalmente flexibles con sus tipados, esto nos ayuda en el desarrollo para autocompletar, trackear errores, y todas las bondades que nos ofrece Typescript.
+
+---
+
+## ¿Qué viene a resolver Vitejs?
+
+### Bundling
+
+Antes que los **ES Modules** ya estuviesen disponibles en algunos navegadores, no había forma de escribir Javascript en una forma más modularizada. Se tuvo que recurrir al **building**, usando herramientas que permitan la busqueda, procesamiento y concatenación de nuestros modulos en archivos que el navegador puedan ejectuar.
+
+No podemos negar que han habido herramientas que han facilitado la experiencia del desarrollo para desarrolladores frontend, tales herramientas han sido:
+
+- [Webpack](https://webpack.js.org/)
+- [Rollup](https://rollupjs.org/)
+- [Parcel](https://parceljs.org/)
+
+Sin embargo, cada vez que escribiamos aplicaciones más y más grandes, teniamos más modulos, cientos o más, lo cual terminaba siendo un cuello de botella para las herramientas javascript. Esto lleva a que **tarde demasiado** en levantar el server en desarrollo, incluso teniendo **HMR**
+
+**Vite **pretende atacar esos problemas haciendo uso de los avances en el ecosistema de Javascript: **ES Modules Nativos** y el surgimiento de nuevas herramientas Javascript que compilan a lenguaje nativo, tal sucede con **esbuild **al estar escrita en Go (10-100x más rápido).
+
+### Inicio Lento del Server de Desarrollo
+
+Actualmente las herramientas que se tienen, tienen que revisar todo el codebase, modulos, para servir la aplicación antes que realmente pueda ser servida. **Vite **mejora el server de desarrollo dividiendo los modulos en **dos categorias:**
+
+---
+
+- **Dependencias**: Código que usualemente no cambia, dependencias que nosotros instalamos, o inclusos deps dependencies. Vite hace un **pre-bundle** de las dependencias usando esbuild.
+
+<mark></mark>
+
+- **Codigo Fuente: **Código que nosotros escribimos, usualmente esto incluye CSS, JSX, VUE Components, etc. Código que será editado muy frecuentemente, además que ese código no necesita ser cargado al mismo tiempo (**route-based-code-splitting**) . Todo el código fuente que escribimos Vite lo sirve atraves de ESM Nativos, dejando al navegador que se encargue de una parte de la responsabilidad de bundler. Es importante mencionar que Vite solo necesita transformar el codigo hasta que el browser lo necesita.
+
+### Mucho tiempo para reflejar cambios
+
+Actualmente algunos bundlers lo que hacen es invalidar el grapho de modulos cuando un archivo cambia, pero igual tiene que reconstruir el bundle completamente y recargar la página.
+
+Vite solamente necesita invalidar la cadena entre el modulo editado y su limite más cercano, haciendo las actualizaciones de HMR más rapidas sin importar el tamaño de la aplicación.
+
+Vite deja mucha de la responsabilidad a los headers del navegador, para acelerar la carga de la página:
+
+- Peticiones de Modulos del Codigo Fuente: `304 Not Modified`
+- Peticiones a Modulos de Dependencias: `Cache-Control: max-age=31536000, immutable`
+
+---
+
+## ¿Por qué se sigue haciendo el Bundle?
+
+Aunque se pueda utilizar ESM Nativo, desplegar unbundled ESM en producción, lleva a problemas de ineficiencia (incluso con HTTP/2) ya que siempre se hacen las peticiones adicionales de **imports anindados**
+
+---
+
+Para tener el optimo desempeño en producción, es mejor hacer el bundle del codigo con [tree-shaking ](https://developers.google.com/web/fundamentals/performance/optimizing-javascript/tree-shaking/), lazy-loading, y chunk-splitting (para mejor caching) Asegurar el mejor comportamiento en el build de dev y producción no es fácil. Por eso Vite despliega la app con comandos para el build pre-configurados y esto lleva a mejores optimizaciones de performance.
+
+## ¿Por qué no utilizar esbuild?
+
+Hemos mencionado esbuild anteriormente, sin embargo aún está siendo completamente implementado por Vite como herramienta principal del build, esto es debido que algunas caraccteristicas importantes y necesarias, para hacer el bundle de aplicaciones están aun en progreso, tales como code-splitting, manejo de CSS. Por ahora se utiliza Rollup, ya que es mas robusto y flexible en este sentido, sin embargo no se descarta la posibilidad de incorporar esbuild completamente una vez esas necesidades hayan sido suplidas.
